@@ -1,5 +1,5 @@
 import 'dart:ui';
-
+import 'package:brasiltransparenteapp/screens/android/home/home_screen.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -7,50 +7,44 @@ class SplashScreen extends StatefulWidget {
   _SplashScreenState createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen>
-    with SingleTickerProviderStateMixin {
-  AnimationController _animationController;
-  Animation<double> _animacaoBlur;
+class _SplashScreenState extends State<SplashScreen>{
 
-  @override
+@override
   void initState() {
     super.initState();
-    _animationController =
-        AnimationController(duration: Duration(seconds: 2), vsync: this);
-    _animacaoBlur = Tween<double>(
-      begin: 5,
-      end: 0,
-    ).animate(
-        CurvedAnimation(parent: _animationController, curve: Curves.ease));
+    Future.delayed(Duration(seconds: 2), 
+    () =>
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(builder: (BuildContext context)=> HomePage()) 
+    ));
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: Colors.white,
       child: Column(
             children: <Widget>[
-              AnimatedBuilder(
-                animation: _animacaoBlur,
-                builder: (context, widget){
-                  return Container(
-                      height: 400,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage("assets/img_splash.png"),
-                              fit: BoxFit.fill
-                          )
-                      ),
-                      child: BackdropFilter(
-                        filter: ImageFilter.blur(
-                          sigmaY: _animacaoBlur.value,
-                          sigmaX: _animacaoBlur.value,
+              Padding(
+                    padding: EdgeInsets.only(top: 200, bottom: 10),
+                    child: Container(
+                        height: 200,
+                        width: 200,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: AssetImage("images/img_splash.png"),
+                                fit: BoxFit.fill
+                            )
                         ),
-                      )
-                  );
-                }
-              ),
+                    ),
+                  ),
+                  Text("Brasil Transparente", 
+                  style: TextStyle(
+                    color: Colors.greenAccent,
+                    fontSize: 20,
+                    decoration: TextDecoration.none
+                  ),),
             ]),
           );
-              
   }
 }
