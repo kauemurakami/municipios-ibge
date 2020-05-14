@@ -1,6 +1,8 @@
-import 'package:brasiltransparenteapp/screens/android/home/components/home_dropdown_widget.dart';
-import 'package:brasiltransparenteapp/screens/android/style/text_style_stepper_home.dart';
+import 'package:brasiltransparenteapp/screens/android/home/components/home_dropdown_cidades_widget.dart';
+import 'package:brasiltransparenteapp/screens/android/style/text_style.dart';
 import 'package:flutter/material.dart';
+
+import 'home_dropdown_estados_widget.dart';
 class StepperWidget extends StatefulWidget {
   @override
   _StepperWidgetState createState() => _StepperWidgetState();
@@ -12,17 +14,13 @@ class _StepperWidgetState extends State<StepperWidget> {
   List<Step> _mySteps() {
     List<Step> _steps = [
       Step(
-        title: Text("Escolha seu estado", style: styleText,),
+        title: Text("Escolha seu estado", style: styleTextStepper,),
         content: DropDownWidget(),
         isActive: _currentStep >= 0,
       ),
       Step(
-        title: Text("Escolha sua cidade", style: styleText,),
-        content: RaisedButton(
-          onPressed: () {},
-          child: Text("Teste"),
-          color: Colors.black,
-        ),
+        title: Text("Escolha sua cidade", style: styleTextStepper,),
+        content: DropDownCityWidget(),
         isActive: _currentStep >= 1,
       )
     ];

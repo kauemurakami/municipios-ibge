@@ -1,4 +1,5 @@
 import 'package:brasiltransparenteapp/data/models/estado_model.dart';
+import 'package:brasiltransparenteapp/screens/android/style/text_style.dart';
 import 'package:flutter/material.dart';
 
 class DropDownWidget extends StatefulWidget {
@@ -23,7 +24,7 @@ class _DropDownWidgetState extends State<DropDownWidget> {
     for(Estado estado in estados){
       items.add(DropdownMenuItem(
         value: estado,
-        child: Text(estado.nome),
+        child: Text(estado.nome,style: styleTextDropDown,),
       ));
     }
     return items;
@@ -44,11 +45,10 @@ class _DropDownWidgetState extends State<DropDownWidget> {
           icon: Icon(Icons.arrow_downward),
           iconSize: 24,
           elevation: 16,
-          style: TextStyle(color: Theme.of(context).primaryColor),
+          style: styleTextDropDown,
           items: _dropdownMenuItems,
           underline: Container(height: 2, color: Theme.of(context).accentColor),
           onChanged: onChangeDropdownItem,
-          //retorna os estados
         ),
       ],
     );
