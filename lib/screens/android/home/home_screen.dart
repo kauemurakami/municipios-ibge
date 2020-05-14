@@ -1,3 +1,6 @@
+import 'package:brasiltransparenteapp/screens/android/components/bottom_navigation_bar.dart';
+import 'package:brasiltransparenteapp/screens/android/components/floatting_button_search.dart';
+import 'package:brasiltransparenteapp/screens/android/home/components/home_stepper_widget.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -6,95 +9,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _currentStep = 0;
-
-  List<Step> _mySteps() {
-    List<Step> _steps = [
-      Step(
-        title: Text("Escolha seu estado"),
-        content: RaisedButton(
-          onPressed: () {},
-          child: Text("Teste"),
-          color: Colors.black,
-        ),
-        isActive: _currentStep >= 0,
-      ),
-      Step(
-        title: Text("Escolha sua cidade"),
-        content: RaisedButton(
-          onPressed: () {},
-          child: Text("Teste"),
-          color: Colors.black,
-        ),
-        isActive: _currentStep >= 1,
-      )
-    ];
-    return _steps;
-  }
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stepper(
-      
-        onStepTapped: (step){
-          setState(() {
-            this._currentStep = step;
-          });
-        },
-        onStepContinue: ,
-        steps: _mySteps(),
-        currentStep: this._currentStep,
-      ),
-
+      body: StepperWidget(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => HomePage(),
-                ));
-          },
-          child: Icon(
-            Icons.search,
-            color: Colors.white,
-          )),
-      bottomNavigationBar: BottomAppBar(
-        shape: CircularNotchedRectangle(),
-        child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              IconButton(
-                icon: Icon(
-                  Icons.info,
-                  color: Colors.black,
-                ),
-                onPressed: () {},
-              ),
-              IconButton(
-                icon: Icon(
-                  Icons.search,
-                  color: Colors.black,
-                ),
-                onPressed: () {},
-              ),
-              IconButton(
-                icon: Icon(
-                  Icons.search,
-                  color: Colors.black,
-                ),
-                onPressed: () {},
-              ),
-              IconButton(
-                icon: Icon(
-                  Icons.search,
-                  color: Colors.black,
-                ),
-                onPressed: () {},
-              ),
-            ]),
-      ),
+      floatingActionButton: FloatButtonWidget(),
+      bottomNavigationBar: BottomMenuWidget()
     );
   }
 }
