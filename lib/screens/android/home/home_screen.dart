@@ -2,7 +2,6 @@ import 'package:brasiltransparenteapp/screens/android/components/bottom_navigati
 import 'package:brasiltransparenteapp/screens/android/components/floatting_button_search.dart';
 import 'package:brasiltransparenteapp/screens/android/home/components/home_stepper_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 
 class HomePage extends StatelessWidget{
   @override

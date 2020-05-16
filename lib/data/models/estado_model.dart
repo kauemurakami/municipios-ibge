@@ -3,10 +3,9 @@ import 'package:meta/meta.dart';
 class Estado{
   String nome;
   String sigla;
-  String nmrIBGE;
   List<Cidade> cidades;
 
-  Estado({@required this.nome,this.sigla,this.nmrIBGE, this.cidades});
+  Estado({@required this.nome,this.sigla, this.cidades});
 
   static List<Estado> getEstados(){
     return <Estado>[
@@ -17,4 +16,13 @@ class Estado{
       Estado(nome: "Minas Gerais"),
     ];
   }
+
+  factory Estado.fromJson(Map<String, dynamic> json){
+    return Estado
+    (nome: json['nome'],
+      sigla: json['sigla']
+    );
+  }
+
+  
 }

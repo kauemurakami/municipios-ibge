@@ -1,5 +1,4 @@
 import 'package:brasiltransparenteapp/data/models/cidade_model.dart';
-import 'package:brasiltransparenteapp/data/models/estado_model.dart';
 import 'package:brasiltransparenteapp/screens/android/style/text_style.dart';
 import 'package:flutter/material.dart';
 
