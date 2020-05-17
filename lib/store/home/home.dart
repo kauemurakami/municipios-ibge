@@ -16,8 +16,8 @@ abstract class _Home with Store{
   Future<List<Estado>> _estados = IBGEApi().getEstados();
 
   @observable
-  Estado _selectedEstado;
-  
+  Estado selectedEstado;
+
   @action
   void incrementStep(){
     if(this._currentStep < 2){
@@ -37,13 +37,15 @@ abstract class _Home with Store{
 
   @action
   onChangeDropdownItem(Estado estado){
-    if(estado != this._selectedEstado || this._selectedEstado == null){
-      this._selectedEstado = estado;
-    }
+      this.selectedEstado = estado;
   }
 
+
   @computed
-  Estado get getSelectedEstado => this._selectedEstado ;
+  bool get getActiveDropE { return this.dropActiveE ; }
+
+  @computed
+  Estado get getSelectedEstado {return this.selectedEstado ; }
 
   @computed
   int get getCurrentStep {return this._currentStep; }

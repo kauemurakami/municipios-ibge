@@ -5,7 +5,8 @@ class Estado{
   String sigla;
   List<Cidade> cidades;
 
-  Estado({@required this.nome,this.sigla, this.cidades});
+  Estado({this.nome,this.sigla, this.cidades});
+  
 
   static List<Estado> getEstados(){
     return <Estado>[

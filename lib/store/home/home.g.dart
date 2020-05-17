@@ -9,6 +9,13 @@ part of 'home.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$Home on _Home, Store {
+  Computed<bool> _$getActiveDropEComputed;
+
+  @override
+  bool get getActiveDropE =>
+      (_$getActiveDropEComputed ??= Computed<bool>(() => super.getActiveDropE,
+              name: '_Home.getActiveDropE'))
+          .value;
   Computed<Estado> _$getSelectedEstadoComputed;
 
   @override
@@ -60,18 +67,18 @@ mixin _$Home on _Home, Store {
     });
   }
 
-  final _$_selectedEstadoAtom = Atom(name: '_Home._selectedEstado');
+  final _$selectedEstadoAtom = Atom(name: '_Home.selectedEstado');
 
   @override
-  Estado get _selectedEstado {
-    _$_selectedEstadoAtom.reportRead();
-    return super._selectedEstado;
+  Estado get selectedEstado {
+    _$selectedEstadoAtom.reportRead();
+    return super.selectedEstado;
   }
 
   @override
-  set _selectedEstado(Estado value) {
-    _$_selectedEstadoAtom.reportWrite(value, super._selectedEstado, () {
-      super._selectedEstado = value;
+  set selectedEstado(Estado value) {
+    _$selectedEstadoAtom.reportWrite(value, super.selectedEstado, () {
+      super.selectedEstado = value;
     });
   }
 
@@ -113,6 +120,8 @@ mixin _$Home on _Home, Store {
   @override
   String toString() {
     return '''
+selectedEstado: ${selectedEstado},
+getActiveDropE: ${getActiveDropE},
 getSelectedEstado: ${getSelectedEstado},
 getCurrentStep: ${getCurrentStep},
 getEstados: ${getEstados}

@@ -3,6 +3,7 @@ import 'package:brasiltransparenteapp/screens/android/style/text_style.dart';
 import 'package:brasiltransparenteapp/store/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:mobx/mobx.dart';
 
 class DropDownWidget extends StatelessWidget {
   final Home _homeStore = Home();
@@ -37,23 +38,30 @@ class DropDownWidget extends StatelessWidget {
                 );
                 break;
               case ConnectionState.done:
-                              return Row(
-                  children: <Widget>[
-                    DropdownButton<Estado>(
-                        value: _homeStore.getSelectedEstado,
-                        icon: Icon(Icons.arrow_downward),
-                        iconSize: 24,
-                        elevation: 16,
-                        style: styleTextDropDown,
-                        items: builDropdownMenuItems(snapshot.data),
-                        underline: Container(
-                            height: 2, color: Theme.of(context).accentColor),
-                        onChanged: (value) {
-                          _homeStore.onChangeDropdownItem(value);
-                          print(value.nome);
-                          print(_homeStore.getSelectedEstado.nome);
-                        }),
-                  ],
+                return Observer(
+                  builder:(context){
+                    return Row(
+                    children: <Widget>[
+                        DropdownButton<Estado>(
+                            value: _homeStore.getSelectedEstado,
+                            hint: Text("Selecione seu estado"),
+                            icon: Icon(Icons.arrow_drop_down),
+                            iconSize: 24,
+                            elevation: 16,
+                            style: styleTextDropDown,
+                            items: builDropdownMenuItems(snapshot.data),
+                            underline: Container(
+                                height: 2,
+                                color: Theme.of(context).accentColor),
+                            onChanged: (value) {
+                              print(value.nome);
+                              _homeStore.onChangeDropdownItem(value);
+                              _selectedEstado = _homeStore.selectedEstado;
+                              print(_homeStore.getSelectedEstado.nome);
+                            }),
+                    ],
+                  );
+                  } 
                 );
             }
             return Container();
