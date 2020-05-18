@@ -3,12 +3,10 @@ import 'package:brasiltransparenteapp/screens/android/style/text_style.dart';
 import 'package:brasiltransparenteapp/store/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:mobx/mobx.dart';
 
 class DropDownWidget extends StatelessWidget {
   final Home _homeStore = Home();
-  Estado _selectedEstado;
-  //List<Estado> _estados = Estado.getEstados();
+
   List<DropdownMenuItem<Estado>> builDropdownMenuItems(List<Estado> estados) {
     List<DropdownMenuItem<Estado>> items = List();
     for (Estado estado in estados) {
@@ -55,9 +53,8 @@ class DropDownWidget extends StatelessWidget {
                                 color: Theme.of(context).accentColor),
                             onChanged: (value) {
                               print(value.nome);
-                              _homeStore.onChangeDropdownItem(value);
-                              _selectedEstado = _homeStore.selectedEstado;
-                              print(_homeStore.getSelectedEstado.nome);
+                              _homeStore.onChangeDropdownItemE(value);
+                              print(_homeStore.getSelectedEstado.sigla);
                             }),
                     ],
                   );

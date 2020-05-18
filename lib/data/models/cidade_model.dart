@@ -1,9 +1,8 @@
-import 'package:meta/meta.dart';
 class Cidade{
   String nome;
-  String estado;
+  int id;
 
-  Cidade({@required this.nome, this.estado});
+  Cidade({this.nome, this.id});
 
   static List<Cidade> getCidades(){
     return <Cidade>[
@@ -14,4 +13,12 @@ class Cidade{
       Cidade(nome: "Minas Gerais"),
     ];
   }
+
+  factory Cidade.fromJson(Map<String, dynamic> json){
+    return Cidade
+    (nome: json['nome'],
+    id: json['id'],
+    );
+  }
+
 }
