@@ -20,12 +20,14 @@ class IBGEApi {
         }
       ).toList();
       return estados;
+      
     }else print('sem retorno');
   }
 
-  Future<List<Cidade>> getCidades(String sigla) async {
-      print(sigla);
-    http.Response response = await http.get('BASE_URL/$sigla/municipios');
+  Future<List<Cidade>> getCidades(Estado estado) async {
+      print(estado.sigla);
+    http.Response response = await http.get('BASE_URL/$estado.sigla/municipios');
+    print(response.statusCode);
     if(response.statusCode == 200){
       print(response.statusCode);
       print(response.body);

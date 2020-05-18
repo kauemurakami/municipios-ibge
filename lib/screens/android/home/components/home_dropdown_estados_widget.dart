@@ -53,7 +53,7 @@ class DropDownWidget extends StatelessWidget {
                                 color: Theme.of(context).accentColor),
                             onChanged: (value) {
                               print(value.nome);
-                              _homeStore.onChangeDropdownItemE(value);
+                              _homeStore.onChangeDropdownItem(value);
                               print(_homeStore.getSelectedEstado.sigla);
                             }),
                     ],

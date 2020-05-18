@@ -1,4 +1,5 @@
-import 'package:brasiltransparenteapp/screens/android/home/components/home_dropdown_cidades_widget.dart';
+import 'package:brasiltransparenteapp/data/models/estado_model.dart';
+import 'package:brasiltransparenteapp/screens/android/home/components/home_textf_cidade_widget.dart';
 import 'package:brasiltransparenteapp/screens/android/style/text_style.dart';
 import 'package:brasiltransparenteapp/store/home/home.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,7 @@ class StepperWidget extends StatelessWidget {
           "Escolha sua cidade",
           style: styleTextStepper,
         ),
-        content: DropDownCityWidget(),
+        content: TextFieldCidades(estado: _homeStore.getSelectedEstado),
         isActive: _homeStore.getCurrentStep >= 1,
       ),
       Step(

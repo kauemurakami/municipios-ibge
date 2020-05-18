@@ -121,17 +121,6 @@ mixin _$Home on _Home, Store {
   final _$_HomeActionController = ActionController(name: '_Home');
 
   @override
-  Future<List<Cidade>> gCidades() {
-    final _$actionInfo =
-        _$_HomeActionController.startAction(name: '_Home.gCidades');
-    try {
-      return super.gCidades();
-    } finally {
-      _$_HomeActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   void incrementStep() {
     final _$actionInfo =
         _$_HomeActionController.startAction(name: '_Home.incrementStep');
@@ -154,22 +143,22 @@ mixin _$Home on _Home, Store {
   }
 
   @override
-  dynamic onChangeDropdownItemE(Estado estado) {
-    final _$actionInfo = _$_HomeActionController.startAction(
-        name: '_Home.onChangeDropdownItemE');
+  dynamic onChangeDropdownItem(Estado estado) {
+    final _$actionInfo =
+        _$_HomeActionController.startAction(name: '_Home.onChangeDropdownItem');
     try {
-      return super.onChangeDropdownItemE(estado);
+      return super.onChangeDropdownItem(estado);
     } finally {
       _$_HomeActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  dynamic onChangeDropdownItemC(Cidade cidade) {
-    final _$actionInfo = _$_HomeActionController.startAction(
-        name: '_Home.onChangeDropdownItemC');
+  Future<List<Cidade>> recuperaCidades(Estado e) {
+    final _$actionInfo =
+        _$_HomeActionController.startAction(name: '_Home.recuperaCidades');
     try {
-      return super.onChangeDropdownItemC(cidade);
+      return super.recuperaCidades(e);
     } finally {
       _$_HomeActionController.endAction(_$actionInfo);
     }

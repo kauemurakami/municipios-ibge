@@ -25,26 +25,15 @@ abstract class _Home with Store {
   Future<List<Cidade>> _cidades;
 
   @action
-  Future<List<Cidade>> gCidades(){
-    if(getSelectedEstado.sigla.isNotEmpty){
-      print(getSelectedEstado.sigla);
-      _cidades = IBGEApi().getCidades(getSelectedEstado.sigla);
-      return _cidades;
-    }else { print('sem sigla');}
-    return _cidades;
-  }
-
-  @action
   void incrementStep() {
     if (this._currentStep < 2) {
       this._currentStep++;
       if(this._currentStep == 1){
-        gCidades();
+        
       }
     } else {
       //depois de finalizar
     }
-
   }
 
   @action
@@ -57,13 +46,8 @@ abstract class _Home with Store {
   }
 
   @action
-  onChangeDropdownItemE(Estado estado) {
+  onChangeDropdownItem(Estado estado) {
     this.selectedEstado = estado;
-  }
-
-  @action
-  onChangeDropdownItemC(Cidade cidade) {
-    this.selectedCidade = cidade;
   }
 
   @computed
@@ -86,7 +70,13 @@ abstract class _Home with Store {
     return this._estados;
   }
   @computed
-  get getCidades {
-    return this._cidades;
+  get getCidades{
+    return _cidades;
+  }
+  
+  @action
+  Future<List<Cidade>> recuperaCidades(Estado e){
+    _cidades = IBGEApi().getCidades(e);
+    return getCidades;
   }
 }

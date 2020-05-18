@@ -34,7 +34,8 @@ dependencies:
   mobx: 
   flutter_mobx:
   http: ^0.12.1
-  
+  autocomplete_textfield: ^1.7.3
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
