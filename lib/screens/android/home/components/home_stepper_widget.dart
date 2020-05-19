@@ -2,12 +2,12 @@ import 'package:brasiltransparenteapp/screens/android/style/text_style.dart';
 import 'package:brasiltransparenteapp/store/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:provider/provider.dart';
 import 'home_dropdown_estados_widget.dart';
 import 'home_text_field_widget.dart';
 
 class StepperWidget extends StatelessWidget {
-  final Home _homeStore = Home();
-  List<Step> _mySteps() {
+  List<Step> _mySteps(_homeStore) {
     List<Step> _steps = [
       Step(
         title: Text(
@@ -22,7 +22,7 @@ class StepperWidget extends StatelessWidget {
           "Escolha a cidade",
           style: styleTextStepper,
         ),
-        content: TextFieldCidades(homeStore: _homeStore,),
+        content: TextFieldCidades(),
         isActive: _homeStore.getCurrentStep >= 1,
       ),
       Step(
@@ -39,6 +39,8 @@ class StepperWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+  final Home _homeStore = Provider.of<Home>(context);
+
     return Observer(
       builder: (_) {
       return Container(
@@ -47,7 +49,7 @@ class StepperWidget extends StatelessWidget {
         child: Stepper(
           onStepContinue: _homeStore.incrementStep,
           onStepCancel: _homeStore.decrementStep,
-          steps: _mySteps(),
+          steps: _mySteps(_homeStore),
           currentStep: _homeStore.getCurrentStep,
         ),
       );

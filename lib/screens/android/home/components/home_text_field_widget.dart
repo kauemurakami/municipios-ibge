@@ -2,11 +2,9 @@ import 'package:autocomplete_textfield/autocomplete_textfield.dart';
 import 'package:brasiltransparenteapp/data/models/cidade_model.dart';
 import 'package:brasiltransparenteapp/store/home/home.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class TextFieldCidades extends StatefulWidget {
-  final Home homeStore;
-
-  TextFieldCidades({this.homeStore});
 
   @override
   _TextFieldCidadesState createState() => _TextFieldCidadesState();
@@ -21,8 +19,10 @@ class _TextFieldCidadesState extends State<TextFieldCidades> {
 
   @override
   Widget build(BuildContext context) {
+    final Home _homeStore = Provider.of<Home>(context);
+
     return FutureBuilder(
-      future: widget.homeStore.recuperaCidades(widget.homeStore.selectedEstado),
+      future: _homeStore.recuperaCidades(_homeStore.selectedEstado),
       builder: (context, snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.none:
