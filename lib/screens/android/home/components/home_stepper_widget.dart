@@ -4,15 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 import '../../style/text_style.dart';
+import '../../style/text_style.dart';
 import 'home_dropdown_estados_widget.dart';
 import 'home_text_field_widget.dart';
 
 class StepperWidget extends StatelessWidget {
-  List<Step> _mySteps(_homeStore, local, sigla) {
+  List<Step> _mySteps(_homeStore) {
     List<Step> _steps = [
       Step(
         title: Text(
-          "Escolha seu estado",
+          "Estado",
           style: styleTextStepper,
         ),
         content: DropDownWidget(_homeStore),
@@ -20,7 +21,7 @@ class StepperWidget extends StatelessWidget {
       ),
       Step(
         title: Text(
-          "Escolha a cidade",
+          "Cidade",
           style: styleTextStepper,
         ),
         content: TextFieldCidades(),
@@ -31,11 +32,13 @@ class StepperWidget extends StatelessWidget {
             "Confirmar",
             style: styleTextStepper,
           ),
-          content: Row(
-            children: <Widget>[
-              Text(local+ ' - ' + sigla, style: styleTextDropDown,),
-            ],
-          ),
+          content: Observer(builder: (_) {
+            return Row(
+              children: <Widget>[
+                Text(_homeStore.selectedCidade.nome+' - '+_homeStore.selectedEstado.sigla, style: styleTextDropDown,),
+              ],
+            );
+          }),
           isActive: _homeStore.getCurrentStep >= 2,
           state: StepState.complete)
     ];
@@ -44,17 +47,16 @@ class StepperWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-  final Home _homeStore = Provider.of<Home>(context);
+    final Home _homeStore = Provider.of<Home>(context);
 
-    return Observer(
-      builder: (_) {
+    return Observer(builder: (_) {
       return Container(
         padding: EdgeInsets.all(8),
         height: MediaQuery.of(context).size.height,
         child: Stepper(
           onStepContinue: _homeStore.incrementStep,
           onStepCancel: _homeStore.decrementStep,
-          steps: _mySteps(_homeStore, _homeStore.getSelectedCidade.nome, _homeStore.selectedEstado.sigla),
+          steps: _mySteps(_homeStore),
           currentStep: _homeStore.getCurrentStep,
         ),
       );
