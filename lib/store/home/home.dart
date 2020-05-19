@@ -13,7 +13,7 @@ abstract class _Home with Store {
   int _currentStep = 0;
 
   @observable
-  Estado selectedEstado;
+  Estado _selectedEstado;
 
   @observable
   Cidade selectedCidade;
@@ -28,9 +28,6 @@ abstract class _Home with Store {
   void incrementStep() {
     if (this._currentStep < 2) {
       this._currentStep++;
-      if(this._currentStep == 1){
-        
-      }
     } else {
       //depois de finalizar
     }
@@ -47,12 +44,14 @@ abstract class _Home with Store {
 
   @action
   onChangeDropdownItem(Estado estado) {
-    this.selectedEstado = estado;
+    selectedEstado = estado;
   }
 
-  @computed
-  Estado get getSelectedEstado {
-    return this.selectedEstado;
+  set selectedEstado (Estado e) => this._selectedEstado = e;
+
+  
+  Estado get selectedEstado {
+    return this._selectedEstado;
   }
 
   @computed
@@ -70,13 +69,13 @@ abstract class _Home with Store {
     return this._estados;
   }
   @computed
-  get getCidades{
+  get cidades{
     return _cidades;
   }
   
   @action
   Future<List<Cidade>> recuperaCidades(Estado e){
     _cidades = IBGEApi().getCidades(e);
-    return getCidades;
+    return cidades;
   }
 }

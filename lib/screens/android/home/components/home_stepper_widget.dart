@@ -1,10 +1,9 @@
-import 'package:brasiltransparenteapp/data/models/estado_model.dart';
-import 'package:brasiltransparenteapp/screens/android/home/components/home_textf_cidade_widget.dart';
 import 'package:brasiltransparenteapp/screens/android/style/text_style.dart';
 import 'package:brasiltransparenteapp/store/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'home_dropdown_estados_widget.dart';
+import 'home_text_field_widget.dart';
 
 class StepperWidget extends StatelessWidget {
   final Home _homeStore = Home();
@@ -15,15 +14,15 @@ class StepperWidget extends StatelessWidget {
           "Escolha seu estado",
           style: styleTextStepper,
         ),
-        content: DropDownWidget(),
+        content: DropDownWidget(_homeStore),
         isActive: _homeStore.getCurrentStep >= 0,
       ),
       Step(
         title: Text(
-          "Escolha sua cidade",
+          "Escolha a cidade",
           style: styleTextStepper,
         ),
-        content: TextFieldCidades(estado: _homeStore.getSelectedEstado),
+        content: TextFieldCidades(homeStore: _homeStore,),
         isActive: _homeStore.getCurrentStep >= 1,
       ),
       Step(
@@ -31,7 +30,7 @@ class StepperWidget extends StatelessWidget {
             "Confirmar",
             style: styleTextStepper,
           ),
-          content: Text("uf - cidade"),
+          content: Text("cidade uf"),
           isActive: _homeStore.getCurrentStep >= 2,
           state: StepState.complete)
     ];

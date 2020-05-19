@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
 class DropDownWidget extends StatelessWidget {
-  final Home _homeStore = Home();
+  final Home homeStore;
+  DropDownWidget(this.homeStore);
 
   List<DropdownMenuItem<Estado>> builDropdownMenuItems(List<Estado> estados) {
     List<DropdownMenuItem<Estado>> items = List();
@@ -25,7 +26,7 @@ class DropDownWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Observer(builder: (context) {
       return FutureBuilder<List<Estado>>(
-          future: _homeStore.getEstados,
+          future: homeStore.getEstados,
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.none:
@@ -41,7 +42,7 @@ class DropDownWidget extends StatelessWidget {
                     return Row(
                     children: <Widget>[
                         DropdownButton<Estado>(
-                            value: _homeStore.getSelectedEstado,
+                            value: homeStore.selectedEstado,
                             hint: Text("Selecione seu estado"),
                             icon: Icon(Icons.arrow_drop_down),
                             iconSize: 24,
@@ -53,8 +54,8 @@ class DropDownWidget extends StatelessWidget {
                                 color: Theme.of(context).accentColor),
                             onChanged: (value) {
                               print(value.nome);
-                              _homeStore.onChangeDropdownItem(value);
-                              print(_homeStore.getSelectedEstado.sigla);
+                              homeStore.onChangeDropdownItem(value);
+                              print(homeStore.selectedEstado.sigla);
                             }),
                     ],
                   );

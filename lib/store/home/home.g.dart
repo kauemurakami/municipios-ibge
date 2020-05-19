@@ -9,13 +9,6 @@ part of 'home.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$Home on _Home, Store {
-  Computed<Estado> _$getSelectedEstadoComputed;
-
-  @override
-  Estado get getSelectedEstado => (_$getSelectedEstadoComputed ??=
-          Computed<Estado>(() => super.getSelectedEstado,
-              name: '_Home.getSelectedEstado'))
-      .value;
   Computed<Cidade> _$getSelectedCidadeComputed;
 
   @override
@@ -36,11 +29,11 @@ mixin _$Home on _Home, Store {
   dynamic get getEstados => (_$getEstadosComputed ??=
           Computed<dynamic>(() => super.getEstados, name: '_Home.getEstados'))
       .value;
-  Computed<dynamic> _$getCidadesComputed;
+  Computed<dynamic> _$cidadesComputed;
 
   @override
-  dynamic get getCidades => (_$getCidadesComputed ??=
-          Computed<dynamic>(() => super.getCidades, name: '_Home.getCidades'))
+  dynamic get cidades => (_$cidadesComputed ??=
+          Computed<dynamic>(() => super.cidades, name: '_Home.cidades'))
       .value;
 
   final _$_currentStepAtom = Atom(name: '_Home._currentStep');
@@ -58,18 +51,18 @@ mixin _$Home on _Home, Store {
     });
   }
 
-  final _$selectedEstadoAtom = Atom(name: '_Home.selectedEstado');
+  final _$_selectedEstadoAtom = Atom(name: '_Home._selectedEstado');
 
   @override
-  Estado get selectedEstado {
-    _$selectedEstadoAtom.reportRead();
-    return super.selectedEstado;
+  Estado get _selectedEstado {
+    _$_selectedEstadoAtom.reportRead();
+    return super._selectedEstado;
   }
 
   @override
-  set selectedEstado(Estado value) {
-    _$selectedEstadoAtom.reportWrite(value, super.selectedEstado, () {
-      super.selectedEstado = value;
+  set _selectedEstado(Estado value) {
+    _$_selectedEstadoAtom.reportWrite(value, super._selectedEstado, () {
+      super._selectedEstado = value;
     });
   }
 
@@ -167,13 +160,11 @@ mixin _$Home on _Home, Store {
   @override
   String toString() {
     return '''
-selectedEstado: ${selectedEstado},
 selectedCidade: ${selectedCidade},
-getSelectedEstado: ${getSelectedEstado},
 getSelectedCidade: ${getSelectedCidade},
 getCurrentStep: ${getCurrentStep},
 getEstados: ${getEstados},
-getCidades: ${getCidades}
+cidades: ${cidades}
     ''';
   }
 }
