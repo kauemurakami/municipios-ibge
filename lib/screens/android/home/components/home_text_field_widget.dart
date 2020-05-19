@@ -18,10 +18,7 @@ class _TextFieldCidadesState extends State<TextFieldCidades> {
   AutoCompleteTextField<Cidade> textField;
 
   Cidade selectedCidade;
-  @override
-  void initState() {
-    super.initState();
-  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -37,8 +34,17 @@ class _TextFieldCidadesState extends State<TextFieldCidades> {
             break;
           case ConnectionState.done:
             print('widget');
-            print(snapshot);
-            return Text(widget.homeStore.selectedEstado.sigla);
+            print(snapshot.data);
+            return textField = AutoCompleteTextField<Cidade>(
+              itemSubmitted: (item)=> setState(() => selectedCidade = item),
+              key: key,
+              suggestions: snapshot.data,
+              itemBuilder: (context, suggestion){
+                return Text(suggestion.nome);
+              },
+              itemSorter: (a,b) => a.nome.compareTo(b.nome),
+              itemFilter: (suggestion, query) => suggestion.nome.toLowerCase().startsWith(query.toLowerCase()),
+            );
         }
         return Container();
       },
