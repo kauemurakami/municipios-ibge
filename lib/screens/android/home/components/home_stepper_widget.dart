@@ -3,11 +3,12 @@ import 'package:brasiltransparenteapp/store/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
+import '../../style/text_style.dart';
 import 'home_dropdown_estados_widget.dart';
 import 'home_text_field_widget.dart';
 
 class StepperWidget extends StatelessWidget {
-  List<Step> _mySteps(_homeStore) {
+  List<Step> _mySteps(_homeStore, local, sigla) {
     List<Step> _steps = [
       Step(
         title: Text(
@@ -30,7 +31,11 @@ class StepperWidget extends StatelessWidget {
             "Confirmar",
             style: styleTextStepper,
           ),
-          content: Text("cidade uf"),
+          content: Row(
+            children: <Widget>[
+              Text(local+ ' - ' + sigla, style: styleTextDropDown,),
+            ],
+          ),
           isActive: _homeStore.getCurrentStep >= 2,
           state: StepState.complete)
     ];
@@ -49,7 +54,7 @@ class StepperWidget extends StatelessWidget {
         child: Stepper(
           onStepContinue: _homeStore.incrementStep,
           onStepCancel: _homeStore.decrementStep,
-          steps: _mySteps(_homeStore),
+          steps: _mySteps(_homeStore, _homeStore.getSelectedCidade.nome, _homeStore.selectedEstado.sigla),
           currentStep: _homeStore.getCurrentStep,
         ),
       );

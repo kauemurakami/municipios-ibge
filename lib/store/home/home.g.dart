@@ -66,18 +66,18 @@ mixin _$Home on _Home, Store {
     });
   }
 
-  final _$selectedCidadeAtom = Atom(name: '_Home.selectedCidade');
+  final _$_selectedCidadeAtom = Atom(name: '_Home._selectedCidade');
 
   @override
-  Cidade get selectedCidade {
-    _$selectedCidadeAtom.reportRead();
-    return super.selectedCidade;
+  Cidade get _selectedCidade {
+    _$_selectedCidadeAtom.reportRead();
+    return super._selectedCidade;
   }
 
   @override
-  set selectedCidade(Cidade value) {
-    _$selectedCidadeAtom.reportWrite(value, super.selectedCidade, () {
-      super.selectedCidade = value;
+  set _selectedCidade(Cidade value) {
+    _$_selectedCidadeAtom.reportWrite(value, super._selectedCidade, () {
+      super._selectedCidade = value;
     });
   }
 
@@ -160,7 +160,6 @@ mixin _$Home on _Home, Store {
   @override
   String toString() {
     return '''
-selectedCidade: ${selectedCidade},
 getSelectedCidade: ${getSelectedCidade},
 getCurrentStep: ${getCurrentStep},
 getEstados: ${getEstados},
