@@ -1,17 +1,14 @@
 import 'package:autocomplete_textfield/autocomplete_textfield.dart';
 import 'package:brasiltransparenteapp/data/models/cidade_model.dart';
+import 'package:brasiltransparenteapp/helpers/g_keys.dart';
 import 'package:brasiltransparenteapp/store/home/home.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
+import '../../../../theme/app_theme.dart';
+import '../../style/text_style.dart';
 
-class TextFieldCidades extends StatefulWidget {
-
-  @override
-  _TextFieldCidadesState createState() => _TextFieldCidadesState();
-}
-
-class _TextFieldCidadesState extends State<TextFieldCidades> {
-  GlobalKey key = new GlobalKey<AutoCompleteTextFieldState<Cidade>>();
+class TextFieldCidades extends StatelessWidget {
 
   AutoCompleteTextField<Cidade> textField;
 
@@ -34,16 +31,33 @@ class _TextFieldCidadesState extends State<TextFieldCidades> {
             break;
           case ConnectionState.done:
             print('widget');
-            print(snapshot.data);
             return textField = AutoCompleteTextField<Cidade>(
-              itemSubmitted: (item)=> setState(() => selectedCidade = item),
-              key: key,
-              suggestions: snapshot.data,
-              itemBuilder: (context, suggestion){
-                return Text(suggestion.nome);
-              },
-              itemSorter: (a,b) => a.nome.compareTo(b.nome),
-              itemFilter: (suggestion, query) => suggestion.nome.toLowerCase().startsWith(query.toLowerCase()),
+                  style: styleTextDropDown,
+                  decoration: InputDecoration(
+                      fillColor: appThemeData.accentColor,
+                      border: UnderlineInputBorder(
+                          borderSide:
+                              BorderSide(color: appThemeData.accentColor))),
+                  itemSubmitted: (item) {
+                    _homeStore.selectedCidade = item;
+                    _homeStore.incrementStep();
+                    print(_homeStore.selectedCidade.nome);
+                  },
+                  key: GKeys.gKey1,
+                  suggestions: snapshot.data,
+                  itemBuilder: (context, suggestion) {
+                    return Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Text(
+                        suggestion.nome,
+                        style: styleTextDropDown,
+                      ),
+                    );
+                  },
+                  itemSorter: (a, b) => a.nome.compareTo(b.nome),
+                  itemFilter: (suggestion, query) => suggestion.nome
+                      .toLowerCase()
+                      .startsWith(query.toLowerCase()),
             );
         }
         return Container();

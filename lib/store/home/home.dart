@@ -16,7 +16,7 @@ abstract class _Home with Store {
   Estado _selectedEstado;
 
   @observable
-  Cidade selectedCidade;
+  Cidade _selectedCidade;
 
   @observable
   Future<List<Estado>> _estados = IBGEApi().getEstados();
@@ -48,15 +48,17 @@ abstract class _Home with Store {
   }
 
   set selectedEstado (Estado e) => this._selectedEstado = e;
-
-  
   Estado get selectedEstado {
     return this._selectedEstado;
+  }
+  set selectedCidade(Cidade c) => this._selectedCidade = c;
+  Cidade get selectedCidade {
+    return this._selectedCidade;
   }
 
   @computed
   Cidade get getSelectedCidade {
-    return this.selectedCidade;
+    return this._selectedCidade;
   }
 
   @computed
